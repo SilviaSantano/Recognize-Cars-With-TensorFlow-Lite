@@ -33,7 +33,7 @@ class ImageAnalyzer(
     private val carsModel = Detect.newInstance(ctx)
 
     // Associated labels from the txt file
-    var associatedAxisLabels: List<String?>? = FileUtil.loadLabels(ctx, ASSOCIATED_AXIS_LABELS)
+    var associatedAxisLabels: List<String> = FileUtil.loadLabels(ctx, ASSOCIATED_AXIS_LABELS)
 
     /**
      * Calculate what rotation of an image is necessary before passing it to the model so as to
@@ -62,7 +62,7 @@ class ImageAnalyzer(
         val probabilityProcessor = TensorProcessor.Builder().build()
         val probabilityBuffer = TensorBuffer.createFixedSize(intArrayOf(1, 196), DataType.UINT8)
         val labels = TensorLabel(
-            associatedAxisLabels!!,
+            associatedAxisLabels,
             probabilityProcessor.process(probabilityBuffer)
         )
 
